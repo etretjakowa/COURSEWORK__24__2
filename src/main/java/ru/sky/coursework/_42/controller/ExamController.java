@@ -9,7 +9,7 @@ import ru.sky.coursework._42.servise.ExaminerServiceImpl;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/get")
+
 public class ExamController {
 
     private final ExaminerServiceImpl examinerService;
@@ -18,7 +18,7 @@ public class ExamController {
         this.examinerService = examinerService;
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public Collection<Question> getQuestions(int amount) {
         return examinerService.getQuestions(amount);
     }

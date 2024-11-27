@@ -12,12 +12,11 @@ import java.util.*;
 public class JavaQuestionService implements QuestionService {
     private final Set<Question> questions = new HashSet<>();
     private int questionNumber;
+    private Random random = new Random();
 
     @Override
     public Question add(String question, String answer) {
-//        if (!StringUtils.hasLength(question) || !StringUtils.hasLength(answer)) {
-//            throw new QuestionOrAnswerIsNullException();
-//        }
+
         Question newQuestion = new Question(question, answer);
         if (questions.contains(newQuestion)) {
             throw new QuestionExistsException();
@@ -62,11 +61,10 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        Random random = new Random();
+
         int randomNumber = random.nextInt(questionNumber);
         List<Question> questionList = new ArrayList<>(questions);
         return questionList.get(randomNumber);
     }
-
 
 }

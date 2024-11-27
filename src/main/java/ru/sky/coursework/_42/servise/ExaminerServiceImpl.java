@@ -25,13 +25,11 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new QuestionsMaximumAmountExceededException();
         }
         if (amount == questionService.getAll().size()) {
-            return randomQuestions = questionService.getAll();
+            return questionService.getAll();
         }
         while (randomQuestions.size() < amount) {
             Question randomQuestion = questionService.getRandomQuestion();
-            if (randomQuestions.contains(randomQuestion)) {
-                continue;
-            }
+
             randomQuestions.add(randomQuestion);
         }
         return randomQuestions;

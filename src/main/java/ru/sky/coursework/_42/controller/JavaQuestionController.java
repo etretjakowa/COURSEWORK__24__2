@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.sky.coursework._42.Question;
-import ru.sky.coursework._42.servise.JavaQuestionService;
+import ru.sky.coursework._42.servise.QuestionService;
 
 
 import java.util.Collection;
@@ -15,33 +15,33 @@ import java.util.Set;
 @RequestMapping("/java")
 public class JavaQuestionController {
 
-    private final JavaQuestionService javaQuestionService;
+    private final QuestionService javaQuestionService;
 
-    public JavaQuestionController(JavaQuestionService javaQuestionService) {
+    public JavaQuestionController(QuestionService javaQuestionService) {
         this.javaQuestionService = javaQuestionService;
     }
 
     @GetMapping
-    public Set<Question> getAllQuestions() {
+    public Collection<Question> getAllQuestions() {
         return javaQuestionService.getAll();
     }
 
     @GetMapping("/add")
-    public String addQuestion(@RequestParam String question, @RequestParam String answer) {
-        javaQuestionService.add(question, answer);
-        return "Вопрос " + question + " с ответом " + answer + " успешно добавлены.";
+    public Question addQuestion(@RequestParam String question, @RequestParam String answer) {
+        return javaQuestionService.add(question, answer);
+
     }
 
     @GetMapping("/remove")
-    public String removeQuestion(@RequestParam String question, @RequestParam String answer) {
-        javaQuestionService.remove(new Question(question, answer));
-        return "Вопрос " + question + " с ответом " + answer + " успешно удалены.";
+    public Question removeQuestion(@RequestParam String question, @RequestParam String answer) {
+        return javaQuestionService.remove(new Question(question, answer));
+
     }
 
     @GetMapping("/find")
-    public String findQuestion(@RequestParam String question, @RequestParam String answer) {
-        javaQuestionService.find(new Question(question, answer));
-        return "Вопрос " + question + " с ответом " + answer + " найден.";
+    public Question findQuestion(@RequestParam String question, @RequestParam String answer) {
+        return javaQuestionService.find(new Question(question, answer));
+
     }
 
 }
